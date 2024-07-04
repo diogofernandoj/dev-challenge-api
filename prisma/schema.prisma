@@ -14,10 +14,10 @@ enum DifficultyLevel {
 }
 
 model SportsActivity {
-  id              String          @id @default(uuid())
-  name            String
-  description     String
-  difficult_level DifficultyLevel
-  created_at      DateTime        @default(now())
-  updated_at      DateTime        @default(now())
+  id               String          @id @default(uuid())
+  name             String
+  description      String
+  difficulty_level DifficultyLevel
+  created_at       DateTime        @default(now())
+  updated_at       DateTime        @default(now())
 }
