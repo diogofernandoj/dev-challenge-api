@@ -2,7 +2,7 @@ import { ZodError } from 'zod'
 
 import { badRequest, created, serverError } from '../../helpers/http.js'
 import { createSportSchema } from '../../schemas/sport.js'
-import { CreateSportUseCase } from '../../use-cases/sport/create-sport.js'
+import { CreateSportRepository } from '../../repositories/sport/create-sport.js'
 
 export class CreateSportController {
     async execute(httpRequest) {
@@ -11,8 +11,8 @@ export class CreateSportController {
 
             await createSportSchema.parseAsync(params)
 
-            const createSportUseCase = new CreateSportUseCase()
-            const createdSport = await createSportUseCase.execute(params)
+            const createSportRepository = new CreateSportRepository()
+            const createdSport = await createSportRepository.execute(params)
 
             return created(createdSport)
         } catch (err) {
