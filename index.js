@@ -2,10 +2,18 @@ import express from 'express'
 
 import { CreateSportController } from './src/controllers/sport/create-sport.js'
 import { DeleteSportController } from './src/controllers/delete-sport.js'
+import { GetSportsController } from './src/controllers/sport/get-sports.js'
 
 const app = express()
 
 app.use(express.json())
+
+app.get('/sports', async (_req, res) => {
+    const getSportsController = new GetSportsController()
+    const { statusCode, body } = await getSportsController.execute()
+
+    res.status(statusCode).send(body)
+})
 
 app.post('/', async (req, res) => {
     const createSportController = new CreateSportController()
