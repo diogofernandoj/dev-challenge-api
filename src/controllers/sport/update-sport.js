@@ -1,11 +1,14 @@
 import validator from 'validator'
 import { badRequest, notFound, ok, serverError } from '../../helpers/http.js'
 import { updateSportSchema } from '../../schemas/sport.js'
-import { UpdateSportRepository } from '../../repositories/sport/update-sport.js'
 import { SportNotFoundError } from '../../errors/sport.js'
 import { ZodError } from 'zod'
 
 export class UpdateSportController {
+    constructor(updateSportRepository) {
+        this.updateSportRepository = updateSportRepository
+    }
+
     async execute(httpRequest) {
         try {
             const sport_id = httpRequest.params.sport_id
@@ -22,8 +25,7 @@ export class UpdateSportController {
 
             await updateSportSchema.parseAsync(params)
 
-            const updateSportRepository = new UpdateSportRepository()
-            const updatedSport = await updateSportRepository.execute(
+            const updatedSport = await this.updateSportRepository.execute(
                 sport_id,
                 params,
             )

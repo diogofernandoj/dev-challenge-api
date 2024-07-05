@@ -12,6 +12,7 @@ import {
     DeleteSportRepository,
     GetSportByIdRepository,
     GetSportsRepository,
+    UpdateSportRepository,
 } from '../repositories/index.js'
 
 export const sportsRouter = Router()
@@ -46,7 +47,10 @@ sportsRouter.post('/', async (req, res) => {
 })
 
 sportsRouter.patch('/:sport_id', async (req, res) => {
-    const updateSportController = new UpdateSportController()
+    const updateSportRepository = new UpdateSportRepository()
+    const updateSportController = new UpdateSportController(
+        updateSportRepository,
+    )
     const { statusCode, body } = await updateSportController.execute(req)
 
     res.status(statusCode).send(body)
