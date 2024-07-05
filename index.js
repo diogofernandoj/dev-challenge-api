@@ -1,7 +1,7 @@
 import express from 'express'
 
 import { CreateSportController } from './src/controllers/sport/create-sport.js'
-import { DeleteSportController } from './src/controllers/delete-sport.js'
+import { DeleteSportController } from './src/controllers/sport/delete-sport.js'
 import { GetSportsController } from './src/controllers/sport/get-sports.js'
 
 const app = express()

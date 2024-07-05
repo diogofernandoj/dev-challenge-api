@@ -1,8 +1,8 @@
 import validator from 'validator'
 
-import { badRequest, notFound, ok, serverError } from '../helpers/http.js'
-import { DeleteSportRepository } from '../repositories/sport/delete-sport.js'
-import { SportNotFoundError } from '../errors/sport.js'
+import { badRequest, notFound, ok, serverError } from '../../helpers/http.js'
+import { DeleteSportRepository } from '../../repositories/sport/delete-sport.js'
+import { SportNotFoundError } from '../../errors/sport.js'
 
 export class DeleteSportController {
     async execute(httpRequest) {
