@@ -11,13 +11,15 @@ import {
     CreateSportRepository,
     DeleteSportRepository,
     GetSportByIdRepository,
+    GetSportsRepository,
 } from '../repositories/index.js'
 
 export const sportsRouter = Router()
 
 // SPORTS ROUTES
 sportsRouter.get('/', async (_req, res) => {
-    const getSportsController = new GetSportsController()
+    const getSportsRepository = new GetSportsRepository()
+    const getSportsController = new GetSportsController(getSportsRepository)
     const { statusCode, body } = await getSportsController.execute()
 
     res.status(statusCode).send(body)

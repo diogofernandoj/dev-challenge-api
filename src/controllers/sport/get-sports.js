@@ -1,12 +1,13 @@
-import { GetSportsRepository } from '../../repositories/sport/get-sports.js'
 import { ok, serverError } from '../../helpers/http.js'
 
 export class GetSportsController {
+    constructor(getSportsRepository) {
+        this.getSportsRepository = getSportsRepository
+    }
+
     async execute() {
         try {
-            const getSportsRepository = new GetSportsRepository()
-
-            const sports = await getSportsRepository.execute()
+            const sports = await this.getSportsRepository.execute()
 
             return ok(sports)
         } catch (err) {
