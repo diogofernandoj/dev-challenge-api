@@ -10,12 +10,12 @@ import {
 import {
     CreateSportRepository,
     DeleteSportRepository,
+    GetSportByIdRepository,
 } from '../repositories/index.js'
 
 export const sportsRouter = Router()
 
 // SPORTS ROUTES
-
 sportsRouter.get('/', async (_req, res) => {
     const getSportsController = new GetSportsController()
     const { statusCode, body } = await getSportsController.execute()
@@ -24,7 +24,10 @@ sportsRouter.get('/', async (_req, res) => {
 })
 
 sportsRouter.get('/:sport_id', async (req, res) => {
-    const getSportByIdController = new GetSportByIdController()
+    const getSportByIdRepository = new GetSportByIdRepository()
+    const getSportByIdController = new GetSportByIdController(
+        getSportByIdRepository,
+    )
     const { statusCode, body } = await getSportByIdController.execute(req)
 
     res.status(statusCode).send(body)

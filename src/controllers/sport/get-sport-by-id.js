@@ -1,9 +1,12 @@
 import validator from 'validator'
 import { badRequest, notFound, ok, serverError } from '../../helpers/http.js'
-import { GetSportByIdRepository } from '../../repositories/sport/get-sport-by-id.js'
 import { SportNotFoundError } from '../../errors/sport.js'
 
 export class GetSportByIdController {
+    constructor(getSportByIdRepository) {
+        this.getSportByIdRepository = getSportByIdRepository
+    }
+
     async execute(httpRequest) {
         try {
             const sport_id = httpRequest.params.sport_id
@@ -16,8 +19,7 @@ export class GetSportByIdController {
                 })
             }
 
-            const getSportByIdRepository = new GetSportByIdRepository()
-            const sport = await getSportByIdRepository.execute(sport_id)
+            const sport = await this.getSportByIdRepository.execute(sport_id)
 
             if (!sport) {
                 throw new SportNotFoundError(sport_id)
