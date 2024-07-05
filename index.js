@@ -4,6 +4,7 @@ import { CreateSportController } from './src/controllers/sport/create-sport.js'
 import { DeleteSportController } from './src/controllers/sport/delete-sport.js'
 import { GetSportsController } from './src/controllers/sport/get-sports.js'
 import { GetSportByIdController } from './src/controllers/sport/get-sport-by-id.js'
+import { UpdateSportController } from './src/controllers/sport/update-sport.js'
 
 const app = express()
 
@@ -26,6 +27,13 @@ app.get('/sports/:sport_id', async (req, res) => {
 app.post('/', async (req, res) => {
     const createSportController = new CreateSportController()
     const { statusCode, body } = await createSportController.execute(req)
+
+    res.status(statusCode).send(body)
+})
+
+app.patch('/sports/:sport_id', async (req, res) => {
+    const updateSportController = new UpdateSportController()
+    const { statusCode, body } = await updateSportController.execute(req)
 
     res.status(statusCode).send(body)
 })
