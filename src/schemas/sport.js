@@ -27,3 +27,5 @@ export const createSportSchema = z
     .strict({
         message: 'Some provided field is not allowed',
     })
+
+export const updateSportSchema = createSportSchema.partial()
