@@ -7,7 +7,10 @@ import {
     UpdateSportController,
 } from '../controllers/index.js'
 
-import { CreateSportRepository } from '../repositories/index.js'
+import {
+    CreateSportRepository,
+    DeleteSportRepository,
+} from '../repositories/index.js'
 
 export const sportsRouter = Router()
 
@@ -45,7 +48,10 @@ sportsRouter.patch('/:sport_id', async (req, res) => {
 })
 
 sportsRouter.delete('/:sport_id', async (req, res) => {
-    const deleteSportController = new DeleteSportController()
+    const deleteSportRepository = new DeleteSportRepository()
+    const deleteSportController = new DeleteSportController(
+        deleteSportRepository,
+    )
     const { statusCode, body } = await deleteSportController.execute(req)
 
     res.status(statusCode).send(body)

@@ -1,10 +1,13 @@
 import validator from 'validator'
 
 import { badRequest, notFound, ok, serverError } from '../../helpers/http.js'
-import { DeleteSportRepository } from '../../repositories/sport/delete-sport.js'
 import { SportNotFoundError } from '../../errors/sport.js'
 
 export class DeleteSportController {
+    constructor(deleteSportRepository) {
+        this.deleteSportRepository = deleteSportRepository
+    }
+
     async execute(httpRequest) {
         try {
             const sport_id = httpRequest.params.sport_id
@@ -17,8 +20,7 @@ export class DeleteSportController {
                 })
             }
 
-            const deleteSportRepository = new DeleteSportRepository()
-            const sport = await deleteSportRepository.execute(sport_id)
+            const sport = await this.deleteSportRepository.execute(sport_id)
 
             return ok(sport)
         } catch (err) {
