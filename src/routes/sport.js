@@ -7,6 +7,8 @@ import {
     UpdateSportController,
 } from '../controllers/index.js'
 
+import { CreateSportRepository } from '../repositories/index.js'
+
 export const sportsRouter = Router()
 
 // SPORTS ROUTES
@@ -26,7 +28,10 @@ sportsRouter.get('/:sport_id', async (req, res) => {
 })
 
 sportsRouter.post('/', async (req, res) => {
-    const createSportController = new CreateSportController()
+    const createSportRepository = new CreateSportRepository()
+    const createSportController = new CreateSportController(
+        createSportRepository,
+    )
     const { statusCode, body } = await createSportController.execute(req)
 
     res.status(statusCode).send(body)
