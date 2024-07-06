@@ -32,4 +32,14 @@ describe('CreateSportController', () => {
 
         expect(res.statusCode).toBe(201)
     })
+
+    it('should return 400 when name is missing', async () => {
+        const { sut } = makeSut()
+
+        const res = await sut.execute({
+            body: { ...httpRequest.body, name: undefined },
+        })
+
+        expect(res.statusCode).toBe(400)
+    })
 })
