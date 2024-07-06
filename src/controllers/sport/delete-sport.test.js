@@ -28,4 +28,12 @@ describe('DeleteSportController', () => {
 
         expect(res.statusCode).toBe(200)
     })
+
+    it('should return 400 when id is invalid', async () => {
+        const { sut } = makeSut()
+
+        const res = await sut.execute({ params: { sport_id: 'invalid_id' } })
+
+        expect(res.statusCode).toBe(400)
+    })
 })
