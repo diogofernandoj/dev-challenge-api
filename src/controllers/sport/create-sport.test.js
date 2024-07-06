@@ -52,4 +52,14 @@ describe('CreateSportController', () => {
 
         expect(res.statusCode).toBe(400)
     })
+
+    it('should return 400 when difficulty_level is missing', async () => {
+        const { sut } = makeSut()
+
+        const res = await sut.execute({
+            body: { ...httpRequest.body, difficulty_level: undefined },
+        })
+
+        expect(res.statusCode).toBe(400)
+    })
 })
