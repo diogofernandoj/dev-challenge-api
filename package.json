@@ -6,6 +6,7 @@
     "type": "module",
     "scripts": {
         "test": "jest",
+        "test:watch": "jest --watch",
         "prepare": "husky && prisma generate",
         "start:dev": "node --watch index.js"
     },
