@@ -29,4 +29,12 @@ describe('GetSportByIdController', () => {
 
         expect(res.statusCode).toBe(200)
     })
+
+    it('should return 400 when provided id is not valid', async () => {
+        const { sut } = makeSut()
+
+        const res = await sut.execute({ params: { sport_id: 'invalid_id' } })
+
+        expect(res.statusCode).toBe(400)
+    })
 })
